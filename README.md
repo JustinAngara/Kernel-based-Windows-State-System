@@ -1,3 +1,5 @@
+# Privated files, will update when finished
+
 # 🛡️ Kernel-Level Windows Game State Analysis & Memory Protection System
 
 > Real-time ring-0 memory inspection, sandboxing, and exploit detection across 10+ Windows games.
