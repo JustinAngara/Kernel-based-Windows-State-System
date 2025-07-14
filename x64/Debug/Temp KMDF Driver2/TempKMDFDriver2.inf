@@ -1,0 +1,62 @@
+;
+; TempKMDFDriver2.inf
+;
+
+[Version]
+Signature   = "$WINDOWS NT$"
+Class       = System ; TODO: specify appropriate Class
+ClassGuid   = {4d36e97d-e325-11ce-bfc1-08002be10318} ; TODO: specify appropriate ClassGuid
+Provider    = %ManufacturerName%
+CatalogFile = TempKMDFDriver2.cat
+DriverVer = 06/21/2025,14.49.21.467
+PnpLockdown = 1
+
+[DestinationDirs]
+DefaultDestDir = 13
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+TempKMDFDriver2.sys = 1,,
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName% = Standard,NTamd64.10.0...16299 ; %13% support introduced in build 16299
+
+[Standard.NTamd64.10.0...16299]
+%TempKMDFDriver2.DeviceDesc% = TempKMDFDriver2_Device, Root\TempKMDFDriver2 ; TODO: edit hw-id
+
+[TempKMDFDriver2_Device.NT]
+CopyFiles = File_Copy
+
+[File_Copy]
+TempKMDFDriver2.sys
+
+;-------------- Service installation
+[TempKMDFDriver2_Device.NT.Services]
+AddService = TempKMDFDriver2,%SPSVCINST_ASSOCSERVICE%, TempKMDFDriver2_Service_Inst
+
+; -------------- TempKMDFDriver2 driver install sections
+[TempKMDFDriver2_Service_Inst]
+DisplayName    = %TempKMDFDriver2.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %13%\TempKMDFDriver2.sys
+
+[TempKMDFDriver2_Device.NT.Wdf]
+KmdfService = TempKMDFDriver2, TempKMDFDriver2_wdfsect
+
+[TempKMDFDriver2_wdfsect]
+KmdfLibraryVersion = 1.15
+
+[Strings]
+SPSVCINST_ASSOCSERVICE = 0x00000002
+ManufacturerName = "<Your manufacturer name>" ;TODO: Replace with your manufacturer name
+DiskName = "TempKMDFDriver2 Installation Disk"
+TempKMDFDriver2.DeviceDesc = "TempKMDFDriver2 Device"
+TempKMDFDriver2.SVCDESC = "TempKMDFDriver2 Service"

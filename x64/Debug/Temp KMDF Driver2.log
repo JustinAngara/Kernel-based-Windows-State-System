@@ -1,0 +1,6 @@
+﻿  Building 'Temp KMDF Driver2' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping x64\Debug\TempKMDFDriver2.inf
+  Stamping [Version] section with DriverVer=06/23/2025,17.37.47.152
+  main.cpp
+main.obj : error LNK2019: unresolved external symbol printf referenced in function DriverEntry
+C:\Users\justi\source\repos\Temp KMDF Driver2\x64\Debug\TempKMDFDriver2.sys : fatal error LNK1120: 1 unresolved externals
